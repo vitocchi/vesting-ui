@@ -1,23 +1,11 @@
 'use client'
 import { useState } from 'react'
 import { TokenDetails } from './TokenDetails'
+import { VestingSchedule } from '@/lib/VestingSchedule'
+import { Token } from '@/lib/alchemy'
 
-type TokenData = {
-  symbol: string
-  totalAmount: number
-  unlockedAmount: number
-  claimedAmount: number
-}
-
-type TokenInfoProps = {
-  tokens: TokenData[]
-  startDate: string
-  endDate: string
-  currentDate: string
-}
-
-export function TokenInfo({ tokens, startDate, endDate, currentDate }: TokenInfoProps) {
-  const [selectedToken, setSelectedToken] = useState<TokenData>(tokens[0])
+export function TokenInfo({ tokens, schedule }: { tokens: Token[], schedule: VestingSchedule }) {
+  const [selectedToken, setSelectedToken] = useState<Token>(tokens[0])
 
   return (
     <div className="space-y-6">
@@ -39,13 +27,8 @@ export function TokenInfo({ tokens, startDate, endDate, currentDate }: TokenInfo
       </div>
       
       <TokenDetails
-        totalAmount={selectedToken.totalAmount}
-        unlockedAmount={selectedToken.unlockedAmount}
-        claimedAmount={selectedToken.claimedAmount}
-        symbol={selectedToken.symbol}
-        startDate={startDate}
-        endDate={endDate}
-        currentDate={currentDate}
+        token={selectedToken}
+        schedule={schedule}
       />
     </div>
   )

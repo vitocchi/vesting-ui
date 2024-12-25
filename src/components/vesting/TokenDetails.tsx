@@ -1,3 +1,5 @@
+import { Token } from '@/lib/alchemy'
+import { VestingSchedule } from '@/lib/VestingSchedule'
 import { UnlockingRate } from './UnlockingRate'
 
 type TokenDetailsProps = {
@@ -11,16 +13,18 @@ type TokenDetailsProps = {
 }
 
 export function TokenDetails({
-  totalAmount,
-  unlockedAmount,
-  claimedAmount,
-  symbol,
-  startDate,
-  endDate,
-  currentDate
-}: TokenDetailsProps) {
-  const claimableAmount = unlockedAmount - claimedAmount
-  const unlockedPercentage = (unlockedAmount / totalAmount) * 100
+  token,
+  schedule
+}: {
+  token: Token
+  schedule: VestingSchedule
+}) {
+  const currentDate = dayjs()
+  const unlockedRate = schedule.getUnlockedRate(currentDate)
+  const unlockedAmount = token.balance.multiply(unlockedRate)
+
+  const claimableAmount = unlockedAmount.subtract(token.balance)
+  const unlockedPercentage = (unlockedAmount / token.balance) * 100
   const claimedPercentage = (claimedAmount / totalAmount) * 100
   const claimablePercentage = (claimableAmount / totalAmount) * 100
 

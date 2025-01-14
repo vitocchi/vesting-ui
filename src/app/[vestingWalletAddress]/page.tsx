@@ -1,17 +1,22 @@
-import { VestingInfo } from "@/components/VestingInfo"
-import { TokenAmount } from "@/lib/TokenAmount";
-import { getVestingWalletData } from "@/lib/vestingWallet";
-import { scheduler } from "timers/promises";
+import { VestingInfoContainer } from "@/components/VestingInfo"
+import { isAddress } from "viem";
+import { NetworkSelector, } from "@/components/NetworkSelector";
+import { AddressSearchBar } from "@/components/AddressSearchBar";
+import { SupportedNetwork } from "@/lib/Network";
 
 type Props = {
   params: {
-    vestingWalletAddress: string
+    vestingWalletAddress: `0x${string}`
+  }
+  searchParams: {
+    network: SupportedNetwork
   }
 }
 
-
-export default async function VestingWalletPage({ params }: Props) {
-  const data = await getVestingWalletData(params.vestingWalletAddress)
+export default async function VestingWalletPage({ params, searchParams }: Props) {
+  if (!isAddress(params.vestingWalletAddress)) {
+    throw new Error('Invalid address')
+  }
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -20,27 +25,15 @@ export default async function VestingWalletPage({ params }: Props) {
           <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
             Vesting Wallet Explorer
           </h1>
-          <div className="flex items-center gap-4">
-            <div className="relative flex items-center">
-              <input
-                type="text"
-                placeholder="Search by Vesting Wallet Address"
-                className="w-96 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm pl-4 font-mono"
-              />
-              <button
-                type="button"
-                className="absolute right-0 px-3 flex items-center h-full"
-              >
-                <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
-            </div>
+          <div className="w-1/2">
+            <AddressSearchBar />
           </div>
+          <NetworkSelector/>
         </div>
 
-        <VestingInfo 
-          data={data}
+        <VestingInfoContainer 
+          vestingWalletAddress={params.vestingWalletAddress}
+          network={searchParams.network}
         />
       </div>
     </main>

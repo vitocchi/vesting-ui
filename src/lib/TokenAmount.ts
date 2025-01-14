@@ -35,4 +35,9 @@ export class TokenAmount {
   divide(a: number): TokenAmount {
     return new TokenAmount(this.wei / BigInt(a), this.decimals)
   }
+
+  divideBy(a: TokenAmount): number {
+    return Number(this.wei / a.wei)
+  }
+
 } 

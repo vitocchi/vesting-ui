@@ -1,26 +1,26 @@
 'use client'
+import { formatNumber } from '@/components/formatNumber'
 import { useState } from 'react'
+export type TimeUnit = 'day' | 'month' | 'year' 
+
 
 type UnlockingRateProps = {
   totalAmount: number
-  startDate: string
-  endDate: string
+  durationSeconds: number
   symbol: string
 }
 
-export function UnlockingRate({ totalAmount, startDate, endDate, symbol }: UnlockingRateProps) {
+export function UnlockingRate({ totalAmount, durationSeconds, symbol }: UnlockingRateProps) {
   const [selectedTimeUnit, setSelectedTimeUnit] = useState<'day' | 'month' | 'year'>('day')
 
   // 日数を計算
-  const start = new Date(startDate)
-  const end = new Date(endDate)
-  const totalDays = (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+  const totalDays = durationSeconds / (1000 * 60 * 60 * 24)
 
   // レートを計算
-  const rateByUnit = {
-    day: `${(totalAmount / totalDays).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${symbol}`,
-    month: `${(totalAmount / (totalDays / 30)).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${symbol}`,
-    year: `${(totalAmount / (totalDays / 365)).toLocaleString(undefined, { maximumFractionDigits: 2 })} ${symbol}`
+  const rateByUnit: Record<TimeUnit, number> = {
+    day: totalAmount / totalDays,
+    month: totalAmount / (totalDays / 30),
+    year: totalAmount / (totalDays / 365)
   }
 
   return (
@@ -36,8 +36,9 @@ export function UnlockingRate({ totalAmount, startDate, endDate, symbol }: Unloc
           <option value="month">per Month</option>
           <option value="year">per Year</option>
         </select>
-        <span className="font-medium text-gray-900">{rateByUnit[selectedTimeUnit]}</span>
+        <span className="font-medium text-gray-900">{formatNumber(rateByUnit[selectedTimeUnit])} {symbol}</span>
       </div>
     </div>
   )
+
 }

@@ -1,12 +1,16 @@
+
 'use client'
+import { VestingWalletClient } from '@/lib/VestingWalletClient'
 import { useState } from 'react'
 
 type AddressInfoProps = {
-  vestingWalletAddress: string
-  beneficiaryAddress: string
+  vestingWalletAddress: `0x${string}`
+  beneficiaryAddress: `0x${string}`
+  vestingWalletLink: string
+  beneficiaryLink: string
 }
 
-export function AddressInfo({ vestingWalletAddress, beneficiaryAddress }: AddressInfoProps) {
+export function AddressInfoPresentation({ vestingWalletAddress, beneficiaryAddress, vestingWalletLink, beneficiaryLink,}: AddressInfoProps) {
   const [copyMessage, setCopyMessage] = useState<string>('')
 
   const copyToClipboard = async (address: string) => {
@@ -15,8 +19,6 @@ export function AddressInfo({ vestingWalletAddress, beneficiaryAddress }: Addres
     setTimeout(() => setCopyMessage(''), 2000)
   }
 
-  const getEtherscanUrl = (address: string) => 
-    `https://etherscan.io/address/${address}`
 
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100 relative">
@@ -38,11 +40,11 @@ export function AddressInfo({ vestingWalletAddress, beneficiaryAddress }: Addres
                 </svg>
               </button>
               <a
-                href={getEtherscanUrl(vestingWalletAddress)}
+                href={vestingWalletLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-1 hover:bg-gray-100 rounded"
-                title="View on Etherscan"
+                title="View on Explorer"
               >
                 <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -68,11 +70,11 @@ export function AddressInfo({ vestingWalletAddress, beneficiaryAddress }: Addres
                 </svg>
               </button>
               <a
-                href={getEtherscanUrl(beneficiaryAddress)}
+                href={beneficiaryLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-1 hover:bg-gray-100 rounded"
-                title="View on Etherscan"
+                title="View on Explorer"
               >
                 <svg className="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

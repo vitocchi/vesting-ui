@@ -39,15 +39,13 @@ export function TokenDetails({
       </div>
 
       <div className="space-y-6">
-        <div>
           <UnlockingRate
             totalAmount={total}
             durationSeconds={vestingDurationSeconds}
             symbol={symbol}
           />
-        </div>
 
-        <div className="pt-4 border-t">
+        <div className="pt-4">
           <div className="relative">
             <div className="w-full bg-gray-300 rounded-full h-4">
               <div className="bg-emerald-400 h-4 rounded-full"

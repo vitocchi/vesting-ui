@@ -1,7 +1,7 @@
 'use client'
 import { formatNumber } from '@/components/formatNumber'
 import { useState } from 'react'
-export type TimeUnit = 'day' | 'month' | 'year' 
+export type TimeUnit = 'day' | 'month' | 'year'
 
 
 type UnlockingRateProps = {
@@ -24,19 +24,21 @@ export function UnlockingRate({ totalAmount, durationSeconds, symbol }: Unlockin
   }
 
   return (
-    <div>
-      <div className="text-sm text-gray-600 mb-1">Unlocking Rate</div>
-      <div className="flex items-baseline space-x-2">
+    <div className="mb-4 flex justify-between items-baseline border-b pb-4">
+      <div className="space-x-2">
+        <span className="text-sm font-medium text-gray-601">Unlocking Rate</span>
         <select
           value={selectedTimeUnit}
           onChange={(e) => setSelectedTimeUnit(e.target.value as 'day' | 'month' | 'year')}
-          className="text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 cursor-pointer"
-        >
-          <option value="day">per Day</option>
-          <option value="month">per Month</option>
-          <option value="year">per Year</option>
-        </select>
-        <span className="font-medium text-gray-900">{formatNumber(rateByUnit[selectedTimeUnit])} {symbol}</span>
+            className="text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 cursor-pointer"
+          >
+            <option value="day">per Day</option>
+            <option value="month">per Month</option>
+            <option value="year">per Year</option>
+          </select>
+      </div>
+      <div className="flex items-baseline">
+        <span className="text-lg font-medium text-gray-900">{formatNumber(rateByUnit[selectedTimeUnit])} {symbol}</span>
       </div>
     </div>
   )

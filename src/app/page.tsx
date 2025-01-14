@@ -26,7 +26,7 @@ export default function Home() {
             Vesting Wallet Explorer
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            View detailed information about any vesting wallet. Enter the wallet address below to see token amounts, vesting schedules, and claim status.
+            View detailed information about any vesting wallet. Enter the wallet address below to see token amounts, vesting schedules, and release status.
           </p>
         </div>
 
@@ -72,8 +72,8 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Check Claims</h3>
-            <p className="text-gray-600">View claimed amounts and check available tokens ready for claiming.</p>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Check Releases</h3>
+            <p className="text-gray-600">View released amounts and check available tokens ready for releaseing.</p>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">

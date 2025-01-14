@@ -1,7 +1,7 @@
 import { VestingWalletClient } from '@/lib/VestingWalletClient'
 import { TokenInfoPresentation } from './VestingInfo/TokenInfoPresentation'
 import { AddressInfoPresentation } from './VestingInfo/AddressInfo/AddressInfoPresentation'
-import { getExplorerLink, SupportedNetwork } from '@/lib/Network'
+import { SupportedNetwork } from '@/lib/Network'
 
 
 export async function VestingInfoContainer({
@@ -20,12 +20,11 @@ export async function VestingInfoContainer({
         <AddressInfoPresentation
           vestingWalletAddress={vestingWalletAddress}
           beneficiaryAddress={beneficiaryAddress}
-          vestingWalletLink={getExplorerLink(vestingWalletAddress, network)}
-          beneficiaryLink={getExplorerLink(beneficiaryAddress, network)}
+          network={network}
         />
 
         <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
-          <TokenInfoPresentation tokens={tokens} />
+          <TokenInfoPresentation tokens={tokens} network={network} />
         </div>
       </div>
     )

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Vesting Wallet Explorer',
-  description: 'View detailed information about any vesting wallet. Check token amounts, vesting schedules, and claim status.',
+  description: 'View detailed information about any vesting wallet. Check token amounts, vesting schedules, and release status.',
 };
 
 export default function RootLayout({

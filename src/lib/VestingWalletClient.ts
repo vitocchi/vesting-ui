@@ -4,7 +4,7 @@ import { sepolia, mainnet, polygon, polygonAmoy } from 'viem/chains'
 import { TokenAmount } from './TokenAmount'
 import dayjs, { Dayjs } from 'dayjs'
 import { Alchemy, Network } from 'alchemy-sdk'
-import { TokenDetailsProps } from '@/components/VestingInfo/TokenInfo/TokenDetails'
+import { TokenDetails, TokenDetailsProps } from '@/components/VestingInfo/TokenInfo/TokenDetails'
 import { SupportedNetwork } from '@/lib/Network'
 
 function getAlchemyNetwork(network: SupportedNetwork): Network {
@@ -57,7 +57,7 @@ export class VestingWalletClient {
 
 
 
-  async getTokenVestings(): Promise<TokenDetailsProps[]> {
+  async getTokenVestings(): Promise<TokenDetails[]> {
 
 
     const balances = await this.alchemy.core.getTokenBalances(this.walletAddress)
@@ -69,11 +69,12 @@ export class VestingWalletClient {
         return {
           symbol: metadata.symbol || 'UNKNOWN',
           currentBalance: convertToUnits(BigInt(token.tokenBalance || '0'), metadata.decimals || 18),
-          claimed: convertToUnits(await this.getClaimedAmount(token.contractAddress as `0x${string}`), metadata.decimals || 18),
-          claimable: convertToUnits(await this.getClaimableAmount(token.contractAddress as `0x${string}`), metadata.decimals || 18),
+          released: convertToUnits(await this.getReleasedAmount(token.contractAddress as `0x${string}`), metadata.decimals || 18),
+          releasable: convertToUnits(await this.getReleasableAmount(token.contractAddress as `0x${string}`), metadata.decimals || 18),
           currentDate: dayjs().toDate(),
           vestingDurationSeconds: Number(await this.getDuration()),
           startAt: dayjs.unix(Number(await this.getStartAt())).toDate(),
+          address: token.contractAddress as `0x${string}`,
         }
       })
     )
@@ -81,7 +82,7 @@ export class VestingWalletClient {
     return tokensDetails.filter(token => token.currentBalance > 0)
   }
 
-  private async getClaimedAmount(tokenAddress: `0x${string}`): Promise<bigint> {
+  private async getReleasedAmount(tokenAddress: `0x${string}`): Promise<bigint> {
     return await this.client.readContract({
       address: this.walletAddress as `0x${string}`,
       abi: VESTING_WALLET_ABI,
@@ -90,7 +91,7 @@ export class VestingWalletClient {
     })
   }
 
-  private async getClaimableAmount(tokenAddress: `0x${string}`): Promise<bigint> {
+  private async getReleasableAmount(tokenAddress: `0x${string}`): Promise<bigint> {
     return await this.client.readContract({
       address: this.walletAddress as `0x${string}`,
       abi: VESTING_WALLET_ABI,

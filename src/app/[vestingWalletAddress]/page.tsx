@@ -1,20 +1,23 @@
 import { VestingInfoContainer } from "@/components/VestingInfo"
 import { isAddress } from "viem";
-import { NetworkSelector, } from "@/components/NetworkSelector";
+import { NetworkSelector } from "@/components/NetworkSelector";
 import { AddressSearchBar } from "@/components/AddressSearchBar";
 import { SupportedNetwork } from "@/lib/Network";
+import Image from 'next/image'
 
-type Props = {
-  params: {
-    vestingWalletAddress: `0x${string}`
-  }
-  searchParams: {
-    network: SupportedNetwork
-  }
+type PageProps = {
+  params: Promise<{
+    vestingWalletAddress: string
+  }>
+  searchParams: Promise<{
+    network?: SupportedNetwork
+  }>
 }
 
-export default async function VestingWalletPage({ params, searchParams }: Props) {
-  if (!isAddress(params.vestingWalletAddress)) {
+export default async function VestingWalletPage({ params, searchParams }: PageProps) {
+  const { vestingWalletAddress } = await params
+  const network = (await searchParams)?.network || 'ethereum'
+  if (!isAddress(vestingWalletAddress)) {
     throw new Error('Invalid address')
   }
 
@@ -23,7 +26,12 @@ export default async function VestingWalletPage({ params, searchParams }: Props)
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Logo" className="w-8 h-8" />
+            <Image 
+              src="/logo.svg" 
+              alt="Logo" 
+              width={32} 
+              height={32}
+            />
             <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
               Vesting Wallet Explorer
             </h1>
@@ -35,8 +43,8 @@ export default async function VestingWalletPage({ params, searchParams }: Props)
         </div>
 
         <VestingInfoContainer 
-          vestingWalletAddress={params.vestingWalletAddress}
-          network={searchParams.network}
+          vestingWalletAddress={vestingWalletAddress}
+          network={network}
         />
       </div>
     </main>

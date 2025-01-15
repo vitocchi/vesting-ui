@@ -18,11 +18,9 @@ export function TokenDetails({
   currentBalance,
   released,
   releasable,
-  currentDate,
   startAt,
   vestingDurationSeconds,
   symbol,
-  address,
   } : TokenDetails) {
   const total = currentBalance + released;
   const unlocked = releasable + released;

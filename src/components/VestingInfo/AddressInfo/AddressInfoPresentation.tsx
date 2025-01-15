@@ -1,8 +1,6 @@
-
 'use client'
 import { ExplorerLink } from '@/components/ExplorerLink'
 import { SupportedNetwork } from '@/lib/Network'
-import { VestingWalletClient } from '@/lib/VestingWalletClient'
 import { useState } from 'react'
 
 type AddressInfoProps = {

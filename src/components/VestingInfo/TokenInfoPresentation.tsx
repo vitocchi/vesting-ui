@@ -5,12 +5,11 @@ import { TokenSelector } from './TokenInfo/TokenSelector'
 import { ExplorerLink } from '../ExplorerLink'
 import { SupportedNetwork } from '@/lib/Network'
 
-export function TokenInfoPresentation({ tokens, network }: { tokens: TokenDetails[], network: SupportedNetwork }) {
-  if (tokens.length === 0) {
-    return <div>No tokens found</div>
-  }
-
+export const TokenInfoPresentation = ({tokens, network}: {tokens: TokenDetails[], network: SupportedNetwork}) => {
   const [selectedToken, setSelectedToken] = useState<TokenDetails>(tokens[0])
+  if (!tokens) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">

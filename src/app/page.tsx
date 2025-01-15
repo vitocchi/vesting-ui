@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function Home() {
   const router = useRouter()
@@ -23,7 +24,13 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <img src="/logo.svg" alt="Logo" className="w-12 h-12" />
+            <Image 
+              src="/logo.svg" 
+              alt="Logo" 
+              width={48}
+              height={48}
+              className="w-12 h-12"
+            />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-3">
             Vesting Wallet Explorer

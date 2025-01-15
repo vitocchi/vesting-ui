@@ -1,4 +1,6 @@
-const Footer = () => {
+import Link from 'next/link'
+
+export function Footer() {
   return (
     <footer className="fixed bottom-0 w-full border-t mt-auto py-4">
       <div className="container mx-auto px-4">
@@ -13,13 +15,19 @@ const Footer = () => {
               Developer: @thank_youkyou
             </a>
             <span>|</span>
-            <a href="/terms" className="hover:text-gray-900">
-              Terms of Use
-            </a>
+            <Link 
+              href="/terms/" 
+              className="text-gray-600 hover:text-gray-900"
+            >
+              Terms of Service
+            </Link>
             <span>|</span>
-            <a href="/" className="hover:text-gray-900">
-              Back to Home
-            </a>
+            <Link 
+              href="/" 
+              className="text-gray-600 hover:text-gray-900"
+            >
+              Home
+            </Link>
           </div>
           <div className="mt-2 md:mt-0">
             © {new Date().getFullYear()} Vesting Wallet Explorer. All rights reserved.
@@ -28,6 +36,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

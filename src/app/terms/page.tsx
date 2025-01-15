@@ -7,14 +7,14 @@ export default function TermsPage() {
         <div className="prose prose-blue max-w-none">
           <h2 className="text-xl font-semibold mb-4">1. Acceptance of Terms</h2>
           <p className="mb-6">
-            By accessing or using the Vesting Wallet Explorer (the "Service"), you agree to be bound by these Terms of Use 
-            ("Terms"). If you do not agree to these Terms, please do not use the Service.
+            By accessing or using the Vesting Wallet Explorer (the &quot;Service&quot;), you agree to be bound by these Terms of Use 
+            (&quot;Terms&quot;). If you do not agree to these Terms, please do not use the Service.
           </p>
 
           <h2 className="text-xl font-semibold mb-4">2. Disclaimer of Warranties</h2>
           <div className="mb-6">
             <p className="mb-4">
-              THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT ANY WARRANTIES OF ANY KIND. WE EXPRESSLY DISCLAIM ALL WARRANTIES AND CONDITIONS OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO:
+              THE SERVICE IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT ANY WARRANTIES OF ANY KIND. WE EXPRESSLY DISCLAIM ALL WARRANTIES AND CONDITIONS OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO:
             </p>
             <ul className="list-disc pl-6 mb-4">
               <li>The accuracy, completeness, or currency of information displayed on the Service</li>

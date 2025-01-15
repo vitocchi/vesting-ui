@@ -1,11 +1,10 @@
 import { VESTING_WALLET_ABI } from '../contracts/VestingWallet'
 import { Chain, createPublicClient, http, PublicClient } from 'viem'
 import { sepolia, mainnet, polygon, polygonAmoy } from 'viem/chains'
-import { TokenAmount } from './TokenAmount'
-import dayjs, { Dayjs } from 'dayjs'
-import { Alchemy, Network } from 'alchemy-sdk'
-import { TokenDetails, TokenDetailsProps } from '@/components/VestingInfo/TokenInfo/TokenDetails'
 import { SupportedNetwork } from '@/lib/Network'
+import { Alchemy, Network } from 'alchemy-sdk'
+import { TokenDetails } from '@/components/VestingInfo/TokenInfo/TokenDetails'
+import dayjs from 'dayjs'
 
 function getAlchemyNetwork(network: SupportedNetwork): Network {
   switch (network) {

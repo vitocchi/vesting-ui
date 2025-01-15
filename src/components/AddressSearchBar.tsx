@@ -1,6 +1,6 @@
 'use client'
 import { SupportedNetwork } from '@/lib/Network'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export function AddressSearchBar({searchNetwork}: {searchNetwork: SupportedNetwork}) {

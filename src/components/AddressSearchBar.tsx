@@ -1,16 +1,15 @@
 'use client'
+import { SupportedNetwork } from '@/lib/Network'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
-export function AddressSearchBar() {
+export function AddressSearchBar({searchNetwork}: {searchNetwork: SupportedNetwork}) {
   const router = useRouter()
   const [searchAddress, setSearchAddress] = useState('')
-  const searchParams = useSearchParams()
-  const selectedNetwork = searchParams.get('network') || 'Ethereum'
 
   const handleSearch = () => {
     if (searchAddress) {
-      router.push(`/${searchAddress}?network=${selectedNetwork}`)
+      router.push(`/${searchAddress}?network=${searchNetwork}`)
     }
   }
 

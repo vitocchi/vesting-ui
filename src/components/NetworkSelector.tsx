@@ -1,26 +1,17 @@
 'use client'
 
 import React, { useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { SUPPORTED_NETWORKS } from '@/lib/Network'
+import { SUPPORTED_NETWORKS, SupportedNetwork } from '@/lib/Network'
 
 
 
 
-export function NetworkSelector() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const [selectedNetwork, setSelectedNetwork] = useState<string>(
-    searchParams.get('network') || 'Ethereum'
-  )
+export function NetworkSelector({initialNetwork, onChange}: {initialNetwork: SupportedNetwork, onChange: (network: SupportedNetwork) => void}) {
+  const [selectedNetwork, setSelectedNetwork] = useState<SupportedNetwork>(initialNetwork)
 
   const handleNetworkChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedNetwork(e.target.value)
-    
-    // URLのクエリパラメータを更新
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('network', e.target.value)
-    router.push(`?${params.toString()}`)
+    setSelectedNetwork(e.target.value as SupportedNetwork)
+    onChange(e.target.value as SupportedNetwork)
   }
 
   return (

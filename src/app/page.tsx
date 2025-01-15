@@ -3,16 +3,16 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import Image from 'next/image'
 import { NetworkSelector } from '@/components/NetworkSelector'
+import { SupportedNetwork } from '@/lib/Network'
 
 export default function Home() {
   const router = useRouter()
   const [searchAddress, setSearchAddress] = useState('')
-  const searchParams = useSearchParams()
-  const selectedNetwork = searchParams.get('network') || 'Ethereum'
+  const [searchNetwork, setSearchNetwork] = useState<SupportedNetwork>('Ethereum')
 
   const handleSearch = () => {
     if (searchAddress) {
-      router.push(`/${searchAddress}?network=${selectedNetwork}`)
+      router.push(`/${searchAddress}?network=${searchNetwork}`)
     }
   }
 
@@ -65,7 +65,7 @@ export default function Home() {
                   </svg>
                 </button>
               </div>
-              <NetworkSelector />
+              <NetworkSelector initialNetwork={searchNetwork} onChange={(network) => setSearchNetwork(network)} />
             </div>
           </div>
         </div>
